@@ -59,7 +59,7 @@ class AppDynamicsJob(unittest.TestCase):
                             driver.close()
                             driver.switch_to_window(windows[0])
                             cursor.executemany(
-                                "INSERT INTO 外销电商_Q195爬虫数据 ([publichdate],[href],[city],[price]) VALUES (%s,%s,%s,%s)",[(spantext,href,'海盐',tdtext)])
+                                "INSERT INTO 外销电商_Q195爬虫数据 ([publichdate],[href],[city],[price]) VALUES (%s,%s,%s,%d)",[(spantext,href,'海盐',int(tdtext))])
                             conn.commit()
 
             pageNum=pageNum+1
