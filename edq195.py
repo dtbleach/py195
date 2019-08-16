@@ -29,13 +29,25 @@ class AppDynamicsJob(unittest.TestCase):
         cursor = conn.cursor()
 
         driver.get(strurl)
-        time.sleep(8)
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/preceding::span[1]").click()
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[1]").clear()
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[1]").send_keys("webhao1230")
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[2]").clear()
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[2]").send_keys("fang933934")
-        driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::div[8]").click()
+        time.sleep(3)
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/preceding::span[1]").click()
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[1]").click()
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[1]").clear()
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[1]").send_keys(
+            "webhao1230")
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[2]").click()
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[2]").clear()
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::input[2]").send_keys(
+            "fang933934")
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='注册'])[1]/following::div[8]").click()
         time.sleep(5)
         ul = driver.find_element_by_css_selector("ul.nlist")
         lis = ul.find_elements_by_xpath('li')
@@ -43,13 +55,14 @@ class AppDynamicsJob(unittest.TestCase):
         for x in lis:
             flag=AppDynamicsJob.isElementExist(self,x)
             if flag:
-                yesterday = (date.today() + timedelta(days=-1)).strftime("%Y-%m-%d")
+                yesterday =(date.today() + timedelta(days=-1)).strftime("%Y-%m-%d")
+                #yesterday=‘2019-07-15’
                 print(yesterday)
                 spantext=x.find_element_by_xpath('span').text
                 print(spantext)
                 stext=spantext[0:10]
                 print(stext)
-                if yesterday==stext:
+                if '2019-07-19'==stext:
                     href=x.find_element_by_xpath('a').get_attribute('href')
                     js = "window.open('"+href+"')"
                     driver.execute_script(js)
