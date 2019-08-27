@@ -55,14 +55,15 @@ class AppDynamicsJob(unittest.TestCase):
         for x in lis:
             flag=AppDynamicsJob.isElementExist(self,x)
             if flag:
-                yesterday =(date.today() + timedelta(days=-1)).strftime("%Y-%m-%d")
+                #yesterday =(date.today() + timedelta(days=-1)).strftime("%Y-%m-%d")
+                yesterday = (date.today()).strftime("%Y-%m-%d")
                 #yesterday=‘2019-07-15’
                 print(yesterday)
                 spantext=x.find_element_by_xpath('span').text
                 print(spantext)
                 stext=spantext[0:10]
                 print(stext)
-                if '2019-07-19'==stext:
+                if yesterday==stext:
                     href=x.find_element_by_xpath('a').get_attribute('href')
                     js = "window.open('"+href+"')"
                     driver.execute_script(js)
